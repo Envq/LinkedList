@@ -125,8 +125,6 @@ void LinkedList::print() const {
         std::cout << ptr->value << std::endl;
         ptr = ptr->next;
     }
-
-    // std::cout << _last->value << std::endl;
 }
 
 
@@ -137,22 +135,28 @@ int LinkedList::operator[] (int index) const {
 }
 
 
-// std::ostream& LinkedList::operator<< (std::ostream& stream, const LinkedList& list) {
-//     Node* ptr = _first;
+std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
+    Node* ptr = list._first;
 
-//     stream << std::endl;
-//     while (ptr != nullptr) {
-//         std::cout << ptr->value 
-//         stream << ptr->value
-//         ptr = ptr->next;
-//     }
-//     stream << std::endl;
-// }
+    stream << "[";
+    while (ptr->next != nullptr) {              // Stop at the penultimum
+        stream << ptr->value << ", ";
+        ptr = ptr->next;
+    }
+    stream << ptr->value << "]";
+    
+    return stream;
+}
 
 
-// std::ostream& operator << (std::ostream& stream, const LinkedList& list) {
 
-// }
+    LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
+        // for (int i = 0; i < list2._size; i++) {
+
+        // }
+        return list1;
+    }
+
 
 
 

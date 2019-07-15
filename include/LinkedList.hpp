@@ -35,11 +35,8 @@ class LinkedList {
 
         //-- OPERATOR OVERLOADING
         int operator[] (int index) const;
-        // friend std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
-        //     stream << _size;
-        //     return stream;
-        // }
-        // operator + -> merge di due liste
+        friend std::ostream& operator<< (std::ostream& stream, const LinkedList& list);
+        friend LinkedList operator+ (const LinkedList list1, const LinkedList list2);
 
     
     private:
@@ -47,14 +44,6 @@ class LinkedList {
     
 };
 
-// class Point {
-//     int x,y;
-
-//     friend std::ostream& operator<<(std::ostream& stream, const Point& point) {
-//         stream << "(" << point.x << "," << point.y << ")";
-//         return stream;
-//     }
-// };
 
 
 

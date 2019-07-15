@@ -14,19 +14,17 @@ int main(int argc, const char** argv) {
 
 
     LinkedList l {};
+    LinkedList m {};
 
     l.push_back(0);
     l.push_back(1);
     l.push_back(2);
     l.push_back(3);
-    l.push_back(4);
     
-    l.erase(3);
-
-    l.push_back(-1);
+    std::cout << l << std::endl;
     
 
-    l.print();
+    // l.print();
 
 
 
