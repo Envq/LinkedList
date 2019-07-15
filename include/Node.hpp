@@ -7,7 +7,7 @@ namespace list {
 
 //-- STRUCTURE
 struct Node {
-    int data;
+    int value;
     Node* next;
 };
 

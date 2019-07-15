@@ -13,15 +13,20 @@ int main(int argc, const char** argv) {
     using namespace list;
 
 
-    LinkedList l {3};
+    LinkedList l {};
 
+    l.push_back(0);
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    l.push_back(4);
+    
+    l.erase(3);
 
+    l.push_back(-1);
+    
 
-
-
-    std::cout << LinkedList::count_istances() << std::endl;
-
-
+    l.print();
 
 
 

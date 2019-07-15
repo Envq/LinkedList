@@ -3,7 +3,7 @@
 #include "Node.hpp"
 
 #include <cstddef>      // size_t
-
+#include <iostream>     // std::ostream
 
 
 
@@ -12,9 +12,11 @@ namespace list {
 
 //-- CLASS INTERFACE
 class LinkedList {
-    size_t _length;
-    Node _first;
     static size_t _instances;
+    size_t _size;
+    Node* _first;
+    Node* _last;
+    int l;
 
     public:
         //-- CONSTRUCTORS
@@ -25,24 +27,42 @@ class LinkedList {
 
         //-- METHODS
         static int count_istances();
-        void insert(int value, int index);
-        void push_back(int value);
         size_t size() const;
+        void push_back(int value);
+        void insert(int value, int index);
         void erase(int index);
         void print() const; 
 
-        
-        // operator << -> print()
-        // operator [] -> accesso
+        //-- OPERATOR OVERLOADING
+        int operator[] (int index) const;
+        // friend std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
+        //     stream << _size;
+        //     return stream;
+        // }
         // operator + -> merge di due liste
 
+    
+    private:
+        Node* searchNode(int index) const;
+    
 };
 
+// class Point {
+//     int x,y;
 
-
+//     friend std::ostream& operator<<(std::ostream& stream, const Point& point) {
+//         stream << "(" << point.x << "," << point.y << ")";
+//         return stream;
+//     }
+// };
 
 
 
 
 } // namespace list
 #include "LinkedList.i.hpp"
+
+
+
+
+
