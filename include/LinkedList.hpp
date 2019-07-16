@@ -16,7 +16,6 @@ class LinkedList {
     size_t _size;
     Node* _first;
     Node* _last;
-    int l;
 
     public:
         //-- CONSTRUCTORS
@@ -37,10 +36,27 @@ class LinkedList {
         friend std::ostream& operator<< (std::ostream& stream, const LinkedList& list);
         friend LinkedList operator+ (const LinkedList& list1, const LinkedList& list2);
 
+        //-- DESTRUCTOR
+        ~LinkedList();
+
     
     private:
         Node* searchNode(int index) const;
     
+};
+
+
+// AUXILIARY CLASS
+class NodeIterator {
+    Node* _pointer;
+
+    public:
+        //-- CONSTRUCTORS
+        NodeIterator(Node* start);                       //user-provided constructor
+
+        //-- METHODS
+        int next();    
+        bool hasNext();
 };
 
 

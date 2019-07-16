@@ -19,7 +19,7 @@ size_t LinkedList::_instances = 0;
 
 //-- CONSTRUCTORS
 
-//user-provided constructor                         
+// user-provided constructor                         
 LinkedList::LinkedList(int count) {
     _instances++;
     _size = 0;
@@ -33,14 +33,15 @@ LinkedList::LinkedList(int count) {
 }
 
 
-//default constructor
+// default constructor
 LinkedList::LinkedList() : LinkedList(0) {}
 
 
-//copy constructor  
+// copy constructor  
 LinkedList::LinkedList(const LinkedList& obj) : LinkedList(0) {
-    for (int i = 0; i < obj._size; i++) {
-        push_back(obj[i]);
+    NodeIterator ptr {obj._first};               //init ptr to node
+    while (ptr.hasNext()) {
+        push_back(ptr.next());
     }
 }           
 
@@ -137,7 +138,7 @@ void LinkedList::print() const {
 
 //-- OPERATOR OVERLOADING
 int LinkedList::operator[] (int index) const {
-    return searchNode(index)->value;              
+    return searchNode(index)->value;
 }
 
 
@@ -170,10 +171,26 @@ LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
         return list1;
 
     LinkedList list {list1};                    //case list1 and list2 not empty
-    for (int i = 0; i < list1._size; i++) {
-        list.push_back(list2[i]);
+    NodeIterator ptr {list2._first};             //init ptr to node
+    while (ptr.hasNext()) {
+        list.push_back(ptr.next());
     }
+
+
+
     return list;
+}
+
+
+
+//-- DESTRUCTOR
+LinkedList::~LinkedList() {
+    Node *ptr = _first;
+    for (int i = 0; i < _size; i++) {
+        _first = _first->next;
+        delete ptr;
+        ptr = _first;
+    }
 }
 
 
@@ -181,7 +198,6 @@ LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
 
 
 //-- PRIVATE METHODS
-
 Node* LinkedList::searchNode(int index) const {
     // check if the operation is valid
     if (index >= _size || index < 0) {
@@ -195,6 +211,27 @@ Node* LinkedList::searchNode(int index) const {
     }
     return ptr;
 }
+
+
+
+
+//-- AUXILIARY CLASS                      
+NodeIterator::NodeIterator(Node* start) {
+    _pointer = start;
+}
+
+int NodeIterator::next() {
+    int ret = _pointer->value;              //get return value
+    _pointer = _pointer->next;              //update pointer
+
+    return ret;
+}
+
+bool NodeIterator::hasNext() {
+    return _pointer != nullptr;
+}
+
+
 
 
 
