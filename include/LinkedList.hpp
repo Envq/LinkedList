@@ -11,6 +11,7 @@ namespace list {
 
 
 //-- CLASS INTERFACE
+// template <typename T>
 class LinkedList {
     static size_t _instances;
     size_t _size;
@@ -52,7 +53,7 @@ class NodeIterator {
 
     public:
         //-- CONSTRUCTORS
-        NodeIterator(Node* start);                       //user-provided constructor
+        NodeIterator(Node* start);              //user-provided constructor
 
         //-- METHODS
         int next();    

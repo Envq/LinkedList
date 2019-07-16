@@ -171,7 +171,7 @@ LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
         return list1;
 
     LinkedList list {list1};                    //case list1 and list2 not empty
-    NodeIterator ptr {list2._first};             //init ptr to node
+    NodeIterator ptr {list2._first};            //init ptr to node
     while (ptr.hasNext()) {
         list.push_back(ptr.next());
     }
