@@ -15,8 +15,8 @@ namespace list {
 class LinkedList {
     static size_t _instances;
     size_t _size;
-    Node* _first;
-    Node* _last;
+    Node<int>* _first;
+    Node<int>* _last;
 
     public:
         //-- CONSTRUCTORS
@@ -42,18 +42,18 @@ class LinkedList {
 
     
     private:
-        Node* searchNode(int index) const;
+        Node<int>* searchNode(int index) const;
     
 };
 
 
 // AUXILIARY CLASS
 class NodeIterator {
-    Node* _pointer;
+    Node<int>* _pointer;
 
     public:
         //-- CONSTRUCTORS
-        NodeIterator(Node* start);              //user-provided constructor
+        NodeIterator(Node<int>* start);              //user-provided constructor
 
         //-- METHODS
         int next();    

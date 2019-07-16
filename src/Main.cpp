@@ -2,29 +2,35 @@
 
 #include <iostream>
 
-
-
+template <typename T>
+struct Box {
+    T obj;
+    Box (T obj) : obj(obj) {
+        std::cout << obj << std::endl;
+    }
+};
 
 
 
 int main(int argc, const char** argv) {
 
 
-    using namespace list;
+    // using namespace list;
 
 
-    LinkedList l {};
+    // LinkedList l;
 
-    l.push_back(0);
-    l.push_back(1);
-    l.push_back(2);
-    l.push_back(3);
+    // l.push_back(0);
+    // l.push_back(1);
+    // l.push_back(2);
+    // l.push_back(3);
 
-    LinkedList m{l};
+    // LinkedList m(l);
 
-    std::cout << l + m << std::endl;
+    // std::cout << l + m << std::endl;
 
 
+    Box<int>* b = new Box(3);
 
 
 

@@ -60,7 +60,7 @@ size_t LinkedList::size() const {
 
 
 void LinkedList::push_back(int value) {
-    Node *node = new Node();            //create new node
+    Node<int>* node = new Node<int>();            //create new node
     node->value = value;
     node->next = nullptr;
     
@@ -81,7 +81,7 @@ void LinkedList::insert(int value, int index) {
         return;
     }
 
-    Node *node = new Node();                    //create new node
+    Node<int>* node = new Node<int>();                    //create new node
     node->value = value;
 
     if (index == 0) {                           //check if is the first
@@ -94,7 +94,7 @@ void LinkedList::insert(int value, int index) {
         _last = node;                           //update _last
 
     } else {
-        Node* previous = searchNode(index - 1); //find previous node
+        Node<int>* previous = searchNode(index - 1); //find previous node
         node->next = previous->next;
         previous->next = node;                  //connect previous node
     }
@@ -109,13 +109,13 @@ void LinkedList::erase(int index) {
     }
 
     if (index == 0) {                           //check if is the first
-        Node* new_first = _first->next;
+        Node<int>* new_first = _first->next;
         delete _first;
         _first = new_first;                     //update _first
     
     } else {
-        Node* previous = searchNode(index - 1); //find previous node
-        Node* to_delete = previous->next;
+        Node<int>* previous = searchNode(index - 1); //find previous node
+        Node<int>* to_delete = previous->next;
         previous->next = to_delete->next;
         delete to_delete;
 
@@ -126,7 +126,7 @@ void LinkedList::erase(int index) {
 
 
 void LinkedList::print() const {
-    Node* ptr = _first;
+    Node<int>* ptr = _first;
 
     while (ptr != nullptr) {
         std::cout << ptr->value << std::endl;
@@ -146,7 +146,7 @@ std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
     if (list._first == nullptr)                 //exit if _first is nullptr
         return stream << "[]";
 
-    Node* ptr = list._first;
+    Node<int>* ptr = list._first;
 
     stream << "[";
     while (ptr->next != nullptr) {              //stop at the penultimum
@@ -185,7 +185,7 @@ LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
 
 //-- DESTRUCTOR
 LinkedList::~LinkedList() {
-    Node *ptr = _first;
+    Node<int>* ptr = _first;
     for (int i = 0; i < _size; i++) {
         _first = _first->next;
         delete ptr;
@@ -198,14 +198,14 @@ LinkedList::~LinkedList() {
 
 
 //-- PRIVATE METHODS
-Node* LinkedList::searchNode(int index) const {
+Node<int>* LinkedList::searchNode(int index) const {
     // check if the operation is valid
     if (index >= _size || index < 0) {
         std::cout << "ERROR: searchNode" << std::endl;
         return nullptr;
     }
 
-    Node *ptr = _first;
+    Node<int>* ptr = _first;
     for (int i = 0; i < index; i++) {
         ptr = ptr->next;
     }
@@ -216,7 +216,7 @@ Node* LinkedList::searchNode(int index) const {
 
 
 //-- AUXILIARY CLASS                      
-NodeIterator::NodeIterator(Node* start) {
+NodeIterator::NodeIterator(Node<int>* start) {
     _pointer = start;
 }
 

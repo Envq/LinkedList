@@ -6,10 +6,10 @@ namespace list {
 
 
 //-- STRUCTURE
-// template <typename T>
+template <typename T>
 struct Node {
-    int value;
-    Node* next;
+    T value;
+    Node<T>* next;
 };
 
 

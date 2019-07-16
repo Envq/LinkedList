@@ -2,6 +2,10 @@ project(LinkedList)                         # project name
 cmake_minimum_required(VERSION 3.5)         # minimum version
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)       # for clang-tidy
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED)
+set(CMAKE_CXX_EXTENSIONS)
+
 
 # Support for c++14
 # CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
