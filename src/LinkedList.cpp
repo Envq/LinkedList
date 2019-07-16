@@ -5,9 +5,14 @@
 #include <iostream>     // cout
 
 
+
+
+
 namespace list {
 
-// Initialization counter of instances
+
+
+// INITIALIZIZATIONS
 size_t LinkedList::_instances = 0;
 
 
@@ -27,15 +32,16 @@ LinkedList::LinkedList(int count) {
     }
 }
 
+
 //default constructor
 LinkedList::LinkedList() : LinkedList(0) {}
 
-//initializer-list constructor  
-// LinkedList(std::initializer_list<int> init) {}
 
 //copy constructor  
-LinkedList::LinkedList(const LinkedList& obj) {
-
+LinkedList::LinkedList(const LinkedList& obj) : LinkedList(0) {
+    for (int i = 0; i < obj._size; i++) {
+        push_back(obj[i]);
+    }
 }           
 
 
@@ -136,10 +142,13 @@ int LinkedList::operator[] (int index) const {
 
 
 std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
+    if (list._first == nullptr)                 //exit if _first is nullptr
+        return stream << "[]";
+
     Node* ptr = list._first;
 
     stream << "[";
-    while (ptr->next != nullptr) {              // Stop at the penultimum
+    while (ptr->next != nullptr) {              //stop at the penultimum
         stream << ptr->value << ", ";
         ptr = ptr->next;
     }
@@ -150,12 +159,22 @@ std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
 
 
 
-    LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
-        // for (int i = 0; i < list2._size; i++) {
+LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
+    if (list1._size == 0 && list2._size == 0)   //case list1 and list2 empty
+        return {};
 
-        // }
+    if (list1._size == 0)                       //case only list1 empty
+        return list2;
+
+    if (list2._size == 0)                       //case only list2 empty
         return list1;
+
+    LinkedList list {list1};                    //case list1 and list2 not empty
+    for (int i = 0; i < list1._size; i++) {
+        list.push_back(list2[i]);
     }
+    return list;
+}
 
 
 
@@ -164,15 +183,18 @@ std::ostream& operator<< (std::ostream& stream, const LinkedList& list) {
 //-- PRIVATE METHODS
 
 Node* LinkedList::searchNode(int index) const {
+    // check if the operation is valid
+    if (index >= _size || index < 0) {
+        std::cout << "ERROR: searchNode" << std::endl;
+        return nullptr;
+    }
+
     Node *ptr = _first;
     for (int i = 0; i < index; i++) {
         ptr = ptr->next;
     }
-    return ptr;                     // no check index -> risk segmentation fault
+    return ptr;
 }
-
-
-
 
 
 

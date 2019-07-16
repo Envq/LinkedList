@@ -22,7 +22,6 @@ class LinkedList {
         //-- CONSTRUCTORS
         LinkedList();                                   //default constructor
         LinkedList(int count);                          //user-provided constructor
-        // LinkedList(std::initializer_list<int> init);    //initializer-list constructor
         LinkedList(const LinkedList& obj);              //copy constructor
 
         //-- METHODS
@@ -36,7 +35,7 @@ class LinkedList {
         //-- OPERATOR OVERLOADING
         int operator[] (int index) const;
         friend std::ostream& operator<< (std::ostream& stream, const LinkedList& list);
-        friend LinkedList operator+ (const LinkedList list1, const LinkedList list2);
+        friend LinkedList operator+ (const LinkedList& list1, const LinkedList& list2);
 
     
     private:
