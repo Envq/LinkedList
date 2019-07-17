@@ -39,7 +39,7 @@ LinkedList::LinkedList() : LinkedList(0) {}
 
 // copy constructor  
 LinkedList::LinkedList(const LinkedList& obj) : LinkedList(0) {
-    NodeIterator ptr {obj._first};               //init ptr to node
+    NodeIterator<int> ptr {obj._first};               //init ptr to node
     while (ptr.hasNext()) {
         push_back(ptr.next());
     }
@@ -171,7 +171,7 @@ LinkedList operator+ (const LinkedList& list1, const LinkedList& list2) {
         return list1;
 
     LinkedList list {list1};                    //case list1 and list2 not empty
-    NodeIterator ptr {list2._first};            //init ptr to node
+    NodeIterator<int> ptr {list2._first};            //init ptr to node
     while (ptr.hasNext()) {
         list.push_back(ptr.next());
     }
@@ -215,19 +215,22 @@ Node<int>* LinkedList::searchNode(int index) const {
 
 
 
-//-- AUXILIARY CLASS                      
-NodeIterator::NodeIterator(Node<int>* start) {
+//-- AUXILIARY CLASS
+template <typename T>                 
+NodeIterator<T>::NodeIterator(Node<T>* start) {
     _pointer = start;
 }
 
-int NodeIterator::next() {
+template <typename T>
+int NodeIterator<T>::next() {
     int ret = _pointer->value;              //get return value
     _pointer = _pointer->next;              //update pointer
 
     return ret;
 }
 
-bool NodeIterator::hasNext() {
+template <typename T>
+bool NodeIterator<T>::hasNext() {
     return _pointer != nullptr;
 }
 

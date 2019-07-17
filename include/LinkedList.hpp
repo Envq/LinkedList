@@ -48,12 +48,12 @@ class LinkedList {
 
 
 // AUXILIARY CLASS
+template <typename T>
 class NodeIterator {
-    Node<int>* _pointer;
-
+    Node<T>* _pointer;
     public:
         //-- CONSTRUCTORS
-        NodeIterator(Node<int>* start);              //user-provided constructor
+        NodeIterator(Node<T>* start);              //user-provided constructor
 
         //-- METHODS
         int next();    
