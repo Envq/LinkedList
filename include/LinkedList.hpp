@@ -11,54 +11,54 @@ namespace list {
 
 
 //-- CLASS INTERFACE
-// template <typename T>
+template <typename T>
 class LinkedList {
     static size_t _instances;
     size_t _size;
-    Node<int>* _first;
-    Node<int>* _last;
+    Node<T>* _first;
+    Node<T>* _last;
 
     public:
         //-- CONSTRUCTORS
         LinkedList();                                   //default constructor
-        LinkedList(int count);                          //user-provided constructor
-        LinkedList(const LinkedList& obj);              //copy constructor
+    //     LinkedList(int count);                          //user-provided constructor
+    //     LinkedList(const LinkedList<T>& obj);           //copy constructor
 
-        //-- METHODS
-        static int count_istances();
-        size_t size() const;
-        void push_back(int value);
-        void insert(int value, int index);
-        void erase(int index);
-        void print() const; 
+    //     //-- METHODS
+    //     static int count_istances();
+    //     size_t size() const;
+    //     void push_back(int value);
+    //     void insert(int value, int index);
+    //     void erase(int index);
+    //     void print() const; 
 
-        //-- OPERATOR OVERLOADING
-        int operator[] (int index) const;
-        friend std::ostream& operator<< (std::ostream& stream, const LinkedList& list);
-        friend LinkedList operator+ (const LinkedList& list1, const LinkedList& list2);
+    //     //-- OPERATOR OVERLOADING
+    //     T operator[] (int index) const;
+    //     template <T> friend std::ostream& operator<< (std::ostream& stream, const LinkedList<T>& list);
+    //     template <T> friend LinkedList operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2);
 
-        //-- DESTRUCTOR
-        ~LinkedList();
+    //     //-- DESTRUCTOR
+    //     ~LinkedList();
 
     
-    private:
-        Node<int>* searchNode(int index) const;
-    
+    // private:
+    //     Node<T>* searchNode(int index) const;
 };
+
 
 
 // AUXILIARY CLASS
-template <typename T>
-class NodeIterator {
-    Node<T>* _pointer;
-    public:
-        //-- CONSTRUCTORS
-        NodeIterator(Node<T>* start);              //user-provided constructor
+// template <typename T>
+// class NodeIterator {
+//     Node<T>* _pointer;
+//     public:
+//         //-- CONSTRUCTORS
+//         NodeIterator(Node<T>* start);              //user-provided constructor
 
-        //-- METHODS
-        int next();    
-        bool hasNext();
-};
+//         //-- METHODS
+//         int next();    
+//         bool hasNext();
+// };
 
 
 
