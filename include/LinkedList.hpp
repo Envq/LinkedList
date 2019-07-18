@@ -3,7 +3,7 @@
 #include "Node.hpp"
 
 #include <cstddef>      // size_t
-#include <iostream>     // std::ostream
+#include <iostream>     // std::ostream, cout
 
 
 
@@ -21,53 +21,46 @@ class LinkedList {
     public:
         //-- CONSTRUCTORS
         LinkedList();                                   //default constructor
-    //     LinkedList(int count);                          //user-provided constructor
-    //     LinkedList(const LinkedList<T>& obj);           //copy constructor
+        LinkedList(int count);                          //user-provided constructor
+        LinkedList(const LinkedList<T>& obj);           //copy constructor
 
-    //     //-- METHODS
-    //     static int count_istances();
-    //     size_t size() const;
-    //     void push_back(int value);
-    //     void insert(int value, int index);
-    //     void erase(int index);
-    //     void print() const; 
+        //-- METHODS
+        static int count_istances();
+        size_t size() const;
+        void push_back(int value);
+        void insert(int value, int index);
+        void erase(int index);
+        void print() const; 
 
-    //     //-- OPERATOR OVERLOADING
-    //     T operator[] (int index) const;
-    //     template <T> friend std::ostream& operator<< (std::ostream& stream, const LinkedList<T>& list);
-    //     template <T> friend LinkedList operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2);
+        //-- OPERATOR OVERLOADING
+        T operator[] (int index) const;
+        template <T> friend std::ostream& operator<< (std::ostream& stream, const LinkedList<T>& list);
+        template <T> friend LinkedList operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2);
 
-    //     //-- DESTRUCTOR
-    //     ~LinkedList();
+        //-- DESTRUCTOR
+        ~LinkedList();
 
     
-    // private:
-    //     Node<T>* searchNode(int index) const;
+        // private:
+        Node<T>* searchNode(int index) const;
 };
 
 
 
+
 // AUXILIARY CLASS
-// template <typename T>
-// class NodeIterator {
-//     Node<T>* _pointer;
-//     public:
-//         //-- CONSTRUCTORS
-//         NodeIterator(Node<T>* start);              //user-provided constructor
+template <typename T>
+class NodeIterator {
+    Node<T>* _pointer;
+    public:
+        //-- CONSTRUCTORS
+        NodeIterator(Node<T>* start);              //user-provided constructor
 
-//         //-- METHODS
-//         int next();    
-//         bool hasNext();
-// };
-
-
-
+        //-- METHODS
+        int next();    
+        bool hasNext();
+};
 
 
 } // namespace list
 #include "LinkedList.i.hpp"
-
-
-
-
-
