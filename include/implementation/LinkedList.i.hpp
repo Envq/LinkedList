@@ -1,3 +1,5 @@
+#include "Util.hpp"     // error
+
 namespace list {
 
 
@@ -34,10 +36,10 @@ LinkedList<T>::LinkedList() : LinkedList(0) {}
 // copy constructor
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList& obj) : LinkedList(0) {
-    // NodeIterator<T> ptr {obj._first};               //init ptr to node
-    // while (ptr.hasNext()) {
-    //     push_back(ptr.next());
-    // }
+    NodeIterator<T> ptr {obj._first};               //init ptr to node
+    while (ptr.hasNext()) {
+        push_back(ptr.next());
+    }
 }  
 
 
@@ -75,12 +77,11 @@ void LinkedList<T>::push_back(int value) {
 
 template <typename T>
 void LinkedList<T>::insert(int value, int index) {    
-    if (index > _size || index < 0) {               // check if the operation is valid
-        std::cout << "ERROR: insert" << std::endl;
-        return;
-    }
+    if (index > _size || index < 0)                 // check if the operation is valid
+        error("Insert");
 
     Node<T>* node = new Node<T>();                  //create new node
+    _size++;                                        //update _size
     node->value = value;
 
     if (index == 0) {                               //check if is the first
@@ -101,21 +102,18 @@ void LinkedList<T>::insert(int value, int index) {
 
 
 template <typename T>
-void LinkedList<T>::erase(int index) {
-    // check if the operation is valid
-    if (index >= _size || index < 0) {
-        std::cout << "ERROR: erase" << std::endl;
-        return;
-    }
-
+void LinkedList<T>::erase(int index) {    
+    if (index >= _size || index < 0)                // check if the operation is valid
+        error("Erase");
+        
     if (index == 0) {                               //check if is the first
-        Node<T>* new_first = _first->next;
-        delete _first;
-        _first = new_first;                         //update _first
+        auto to_delete = _first;
+        _first = _first->next;                      //update _first
+        delete to_delete;
     
     } else {
-        Node<T>* previous = searchNode(index - 1);  //find previous node
-        Node<T>* to_delete = previous->next;
+        auto previous = searchNode(index - 1);      //find previous node
+        auto to_delete = previous->next;
         previous->next = to_delete->next;
         delete to_delete;
 
@@ -127,11 +125,9 @@ void LinkedList<T>::erase(int index) {
 
 template <typename T>
 void LinkedList<T>::print() const {
-    Node<T>* ptr = _first;
-
-    while (ptr != nullptr) {
-        std::cout << ptr->value << std::endl;
-        ptr = ptr->next;
+    NodeIterator<T> ptr {_first};                   //init ptr to node
+    while (ptr.hasNext()) {
+        std::cout << ptr.next() << std::endl;
     }
 }
 
@@ -141,7 +137,11 @@ void LinkedList<T>::print() const {
 //-- OPERATOR OVERLOADING------------------------------------
 
 template <typename T>
-T LinkedList<T>::operator[] (int index) const {
+T LinkedList<T>::operator[] (int index) const {    
+    // if (index >= _size || index < 0) {              // check if the operation is valid
+    //     std::cout << "ERROR: []" << std::endl;
+    //     return;
+    // }
     return searchNode(index)->value;
 }
 
@@ -186,15 +186,15 @@ LinkedList<T> operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2)
 
 
 //-- DESTRUCTOR
-template <typename T>
-LinkedList<T>::~LinkedList() {
-    Node<T>* ptr = _first;
-    for (int i = 0; i < _size; i++) {
-        _first = _first->next;
-        delete ptr;
-        ptr = _first;
-    }
-}
+// template <typename T>
+// LinkedList<T>::~LinkedList() {
+//     Node<T>* ptr = _first;
+//     for (int i = 0; i < _size; i++) {
+//         _first = _first->next;
+//         delete ptr;
+//         ptr = _first;
+//     }
+// }
 
 
 
@@ -203,10 +203,8 @@ LinkedList<T>::~LinkedList() {
 
 template <typename T>
 Node<T>* LinkedList<T>::searchNode(int index) const {
-    if (index >= _size || index < 0) {                  // check if the operation is valid
-        std::cout << "ERROR: searchNode" << std::endl;
-        return nullptr;
-    }
+    if (index >= _size || index < 0)                    // check if the operation is valid
+        error("SearchNode");
 
     Node<T>* ptr = _first;
     for (int i = 0; i < index; i++) {

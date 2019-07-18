@@ -33,12 +33,12 @@ class LinkedList {
         void print() const; 
 
         //-- OPERATOR OVERLOADING
-        T operator[] (int index) const;
-        template <T> friend std::ostream& operator<< (std::ostream& stream, const LinkedList<T>& list);
-        template <T> friend LinkedList operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2);
+        T (operator[]) (int index) const;
+        template <T> friend std::ostream& (operator<<) (std::ostream& stream, const LinkedList<T>& list);
+        template <T> friend LinkedList (operator+) (const LinkedList<T>& list1, const LinkedList<T>& list2);
 
         //-- DESTRUCTOR
-        ~LinkedList();
+        // ~LinkedList();
 
     
         // private:
@@ -63,4 +63,4 @@ class NodeIterator {
 
 
 } // namespace list
-#include "LinkedList.i.hpp"
+#include "implementation/LinkedList.i.hpp"
