@@ -9,13 +9,16 @@
 
 int main(int argc, const char** argv) {
 
+
     using namespace list;
 
     LinkedList <int> l {};                                      // OK
 
-    l.push_back(10);                                             // OK
+    l.push_back(10);                                            // OK
     l.push_back(11);
     l.push_back(12);
+
+    std::cout << l << std::endl;
 
     // l.print();                                               // OK
 
@@ -37,8 +40,8 @@ int main(int argc, const char** argv) {
     // std::cout << "I: " << l.count_istances() << std::endl;   // OK
 
 
-    // std::cout << "l[0]: " << l[0] << std::endl;              // fix check error
-    // std::cout << l << std::endl;                             // NOT WORK
+    // std::cout << "l[0]: " << l[0] << std::endl;              // OK
+    // std::cout << l << std::endl;                            // OK
 
 
     // Node<int>* n  = new Node<int>();
@@ -58,8 +61,6 @@ int main(int argc, const char** argv) {
     // delete n;
     // n = n2;
     // std::cout << n->value << std::endl;
-
-    // REMEMBER TO FIX DESTRUCTOR that not work -> segmentation error
 
     return 0;
 }

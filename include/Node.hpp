@@ -13,5 +13,5 @@ struct Node {
 };
 
 
-
 } // namespace list
+#include "implementation/Node.i.hpp"

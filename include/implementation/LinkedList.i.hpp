@@ -137,21 +137,18 @@ void LinkedList<T>::print() const {
 //-- OPERATOR OVERLOADING------------------------------------
 
 template <typename T>
-T LinkedList<T>::operator[] (int index) const {    
-    // if (index >= _size || index < 0) {              // check if the operation is valid
-    //     std::cout << "ERROR: []" << std::endl;
-    //     return;
-    // }
+T LinkedList<T>::operator[] (int index) const {
+    // check control is implicit in searchNode
     return searchNode(index)->value;
 }
 
 
-template <typename T>
-std::ostream& operator<< (std::ostream& stream, const LinkedList<T>& list) {
+template <typename R>
+std::ostream& operator<< (std::ostream& stream, const LinkedList<R>& list) {
     if (list._first == nullptr)                 //exit if _first is nullptr
         return stream << "[]";
 
-    Node<T>* ptr = list._first;
+    Node<R>* ptr = list._first;
 
     stream << "[";
     while (ptr->next != nullptr) {              //stop at the penultimum
@@ -164,8 +161,8 @@ std::ostream& operator<< (std::ostream& stream, const LinkedList<T>& list) {
 }
 
 
-template <typename T>
-LinkedList<T> operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2) {
+template <typename R>
+LinkedList<R> operator+ (const LinkedList<R>& list1, const LinkedList<R>& list2) {
     if (list1._size == 0 && list2._size == 0)   //case list1 and list2 empty
         return {};
 
@@ -176,7 +173,7 @@ LinkedList<T> operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2)
         return list1;
 
     LinkedList list {list1};                    //case list1 and list2 not empty
-    NodeIterator<T> ptr {list2._first};         //init ptr to node
+    NodeIterator<R> ptr {list2._first};         //init ptr to node
     while (ptr.hasNext()) {
         list.push_back(ptr.next());
     }
@@ -186,15 +183,16 @@ LinkedList<T> operator+ (const LinkedList<T>& list1, const LinkedList<T>& list2)
 
 
 //-- DESTRUCTOR
-// template <typename T>
-// LinkedList<T>::~LinkedList() {
-//     Node<T>* ptr = _first;
-//     for (int i = 0; i < _size; i++) {
-//         _first = _first->next;
-//         delete ptr;
-//         ptr = _first;
-//     }
-// }
+template <typename T>
+LinkedList<T>::~LinkedList() {
+    Node <T>* to_delete = nullptr;
+
+    while (_first != nullptr) {
+        to_delete = _first;                     // update ptr
+        _first = _first->next;                  // update _first
+        delete to_delete;                       // delete node
+    }
+}
 
 
 
@@ -212,8 +210,6 @@ Node<T>* LinkedList<T>::searchNode(int index) const {
     }
     return ptr;
 }
-
-
 
 
 

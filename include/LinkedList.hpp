@@ -34,18 +34,18 @@ class LinkedList {
 
         //-- OPERATOR OVERLOADING
         T (operator[]) (int index) const;
-        template <T> friend std::ostream& (operator<<) (std::ostream& stream, const LinkedList<T>& list);
-        template <T> friend LinkedList (operator+) (const LinkedList<T>& list1, const LinkedList<T>& list2);
+        template <typename R>
+            friend std::ostream& operator<< (std::ostream& stream, const LinkedList<R>& list);
+        template <typename R>
+             friend LinkedList<R> operator+ (const LinkedList<R>& list1, const LinkedList<R>& list2);
 
         //-- DESTRUCTOR
-        // ~LinkedList();
+        ~LinkedList();
 
     
         // private:
         Node<T>* searchNode(int index) const;
 };
-
-
 
 
 // AUXILIARY CLASS
