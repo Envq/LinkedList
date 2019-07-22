@@ -9,16 +9,20 @@
 
 int main(int argc, const char** argv) {
 
+   
+    
 
-    using namespace list;
 
-    LinkedList <int> l {};                                      // OK
 
-    l.push_back(10);                                            // OK
-    l.push_back(11);
-    l.push_back(12);
+    // using namespace list;
 
-    std::cout << l << std::endl;
+    // LinkedList <int> l {};                                      // OK
+
+    // l.push_back(10);                                            // OK
+    // l.push_back(11);
+    // l.push_back(12);
+
+    // std::cout << l << std::endl;
 
     // l.print();                                               // OK
 

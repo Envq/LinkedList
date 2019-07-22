@@ -1,8 +1,8 @@
 #pragma once
 
 
-namespace list {
 
+namespace list {
 
 
 //-- STRUCTURE

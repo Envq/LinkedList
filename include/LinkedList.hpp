@@ -15,8 +15,9 @@ template <typename T>
 class LinkedList {
     static size_t _instances;
     size_t _size;
-    Node<T>* _first;
-    Node<T>* _last;
+    Node<T>* _head;
+    Node<T>* _tail;
+
 
     public:
         //-- CONSTRUCTORS
@@ -48,13 +49,14 @@ class LinkedList {
 };
 
 
+
 // AUXILIARY CLASS
 template <typename T>
 class NodeIterator {
     Node<T>* _pointer;
     public:
         //-- CONSTRUCTORS
-        NodeIterator(Node<T>* start);              //user-provided constructor
+        NodeIterator(Node<T>* start);                   //user-provided constructor
 
         //-- METHODS
         int next();    
