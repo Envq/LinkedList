@@ -21,9 +21,9 @@ class LinkedList {
 
     public:
         //-- CONSTRUCTORS
-        LinkedList();                                   //default constructor
-        LinkedList(int count);                          //user-provided constructor
-        LinkedList(const LinkedList<T>& obj);           //copy constructor
+        explicit LinkedList();                                   //default constructor
+        explicit LinkedList(int count);                          //user-provided constructor
+        explicit LinkedList(const LinkedList<T>& obj);           //copy constructor
 
         //-- METHODS
         static int count_istances();
@@ -56,7 +56,7 @@ class NodeIterator {
     Node<T>* _pointer;
     public:
         //-- CONSTRUCTORS
-        NodeIterator(Node<T>* start);                   //user-provided constructor
+        explicit NodeIterator(Node<T>* start);                   //user-provided constructor
 
         //-- METHODS
         int next();    

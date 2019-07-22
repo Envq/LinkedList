@@ -7,16 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED)
 set(CMAKE_CXX_EXTENSIONS)
 
 
-# Support for c++14
-# CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
-# if (COMPILER_SUPPORTS_CXX14)
-#     add_compile_options("-std=c++14")
-# else()
-#     message(FATAL_ERROR "Compiler ${CMAKE_CXX_COMPILER} has no C++14 support.")
-# endif()
-
-
-
 # Options for compiler used
 if (CMAKE_COMPILER_IS_GNUCXX)
     message(GCC)
@@ -24,6 +14,12 @@ elseif (CMAKE_COMPILER_ID EQUAL "Clang")
     message(Clang)
 endif()
 
+
+# Compile options
+add_compile_options("-Wall")
+add_compile_options("-Wextra")
+add_compile_options("-Wpedantic")
+add_compile_options("-Werror")
 
 
 # Mode selected
@@ -43,12 +39,10 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "debug")
 endif()
 
 
-
 # BUild
 include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_executable(exe ${SRCS})
-
 
 
 # CUSTOM TARGES
@@ -56,7 +50,6 @@ add_custom_target(  rm
                     COMMAND rm -rf *.o
                     COMMENT "Clear buld directory"
 )
-
 
 
 # TEST

@@ -55,7 +55,7 @@ size_t LinkedList<T>::size() const {
 
 template <typename T>
 void LinkedList<T>::push_back(int value) {
-    Node<T>* node = new Node<T>();                  //create new node
+    auto node = new Node<T>();                      //create new node
     node->value = value;
     node->next = nullptr;
     
@@ -73,13 +73,13 @@ void LinkedList<T>::insert(int value, int index) {
     if (index > _size || index < 0)                 // check if the operation is valid
         error("Insert");
 
-    Node<T>* node = new Node<T>();                  //create new node
+    auto node = new Node<T>();                      //create new node
     _size++;                                        //update _size
     node->value = value;
 
     if (index == 0) {                               //check if is the first
         node->next = _head;
-        _head = node;                              //update _head
+        _head = node;                               //update _head
 
     } else if (index == _size) {                    //check if is the last
         node->next = nullptr;
@@ -87,7 +87,7 @@ void LinkedList<T>::insert(int value, int index) {
         _tail = node;                               //update _tail
 
     } else {
-        Node<T>* previous = searchNode(index - 1);  //find previous node
+        auto previous = searchNode(index - 1);      //find previous node
         node->next = previous->next;
         previous->next = node;                      //connect previous node
     }
@@ -133,10 +133,10 @@ T LinkedList<T>::operator[] (int index) const {
 
 template <typename R>
 std::ostream& operator<< (std::ostream& stream, const LinkedList<R>& list) {
-    if (list._head == nullptr)                 //exit if _head is nullptr
+    if (list._head == nullptr)                  //exit if _head is nullptr
         return stream << "[]";
 
-    Node<R>* ptr = list._head;
+    auto ptr = list._head;
 
     stream << "[";
     while (ptr->next != nullptr) {              //stop at the penultimum
@@ -189,7 +189,7 @@ Node<T>* LinkedList<T>::searchNode(int index) const {
     if (index >= _size || index < 0)                    // check if the operation is valid
         error("SearchNode");
 
-    Node<T>* ptr = _head;
+    auto ptr = _head;
     for (int i = 0; i < index; i++) {
         ptr = ptr->next;
     }

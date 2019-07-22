@@ -7,16 +7,19 @@
 
 
 
-int main(int argc, const char** argv) {
+int main() {
 
    
     
 
 
 
-    // using namespace list;
+    using namespace list;
 
-    // LinkedList <int> l {};                                      // OK
+    LinkedList <int> l {};                                      // OK
+
+
+
 
     // l.push_back(10);                                            // OK
     // l.push_back(11);
