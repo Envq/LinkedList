@@ -5,21 +5,14 @@
 namespace list {
 
 
-//-- INITIALIZATIONS    -------------------------------------
-
-template <typename T>   
-size_t LinkedList<T>::_instances = 0;
-
-
 //-- CONSTRUCTORS       -------------------------------------
-
 // user-provided constructor
 template <typename T>                         
 LinkedList<T>::LinkedList(int count) {
-    _instances++;
+    std::cout << "CONSTRUCTOR LINKEDLIST" << std::endl;
     _size = 0;
     _head = nullptr;
-    _tail = _head;
+    _tail = nullptr;
 
     // init list
     for (int i = 0; i < count; i++) {
@@ -38,15 +31,30 @@ LinkedList<T>::LinkedList(const LinkedList& obj) : LinkedList(0) {
     while (ptr.hasNext()) {
         push_back(ptr.next());
     }
-}  
+}
+
+
+//-- DESTRUCTOR
+template <typename T>
+LinkedList<T>::~LinkedList() {
+    std::cout << "DESTRUCTOR LINKEDLIST" << std::endl;
+    Node <T>* to_delete = nullptr;
+
+    while (_head != nullptr) {
+        to_delete = _head;                      // update ptr
+        _head = _head->next;                    // update _head
+        delete to_delete;                       // delete node
+    }
+}
 
 
 //-- METHODS PUBLIC     -------------------------------------
+// template <typename T>
+// int LinkedList<T>::foo() {
+//     // return List<T>::count_instances();
+//     return -3;
+// }
 
-template <typename T>
-int LinkedList<T>::count_istances() {
-    return _instances;
-}
 
 template <typename T>
 size_t LinkedList<T>::size() const {
@@ -70,7 +78,7 @@ void LinkedList<T>::push_back(int value) {
 
 template <typename T>
 void LinkedList<T>::insert(int value, int index) {    
-    if (index > _size || index < 0)                 // check if the operation is valid
+    if (index < 0 || (size_t) index > _size)        // check if the operation is valid
         error("Insert");
 
     auto node = new Node<T>();                      //create new node
@@ -81,7 +89,7 @@ void LinkedList<T>::insert(int value, int index) {
         node->next = _head;
         _head = node;                               //update _head
 
-    } else if (index == _size) {                    //check if is the last
+    } else if ((size_t) index == _size) {           //check if is the last
         node->next = nullptr;
         _tail->next = node;
         _tail = node;                               //update _tail
@@ -95,7 +103,7 @@ void LinkedList<T>::insert(int value, int index) {
 
 template <typename T>
 void LinkedList<T>::erase(int index) {    
-    if (index >= _size || index < 0)                // check if the operation is valid
+    if (index < 0 || (size_t) index >= _size)       // check if the operation is valid
         error("Erase");
         
     if (index == 0) {                               //check if is the first
@@ -109,28 +117,35 @@ void LinkedList<T>::erase(int index) {
         previous->next = to_delete->next;
         delete to_delete;
 
-        if (index == _size -1)                      //check if is the last
+        if ((size_t) index == _size -1)             //check if is the last
             _tail = previous;
     }
 }
 
 template <typename T>
 void LinkedList<T>::print() const {
-    NodeIterator<T> ptr {_head};                   //init ptr to node
+    NodeIterator<T> ptr {_head};                    //init ptr to node
     while (ptr.hasNext()) {
         std::cout << ptr.next() << std::endl;
     }
 }
 
 
-//-- OPERATOR OVERLOADING------------------------------------
-
+//-- UNARY OPERATOR OVERLOADING------------------------------
 template <typename T>
-T LinkedList<T>::operator[] (int index) const {
+const T& LinkedList<T>::operator[] (size_t index) const{
     // check control is implicit in searchNode
     return searchNode(index)->value;
 }
 
+template <typename T>
+T& LinkedList<T>::operator[] (size_t index) {
+    // check control is implicit in searchNode
+    return searchNode(index)->value;
+}
+
+
+//-- BINARY OPERATOR OVERLOADING-----------------------------
 template <typename R>
 std::ostream& operator<< (std::ostream& stream, const LinkedList<R>& list) {
     if (list._head == nullptr)                  //exit if _head is nullptr
@@ -160,7 +175,7 @@ LinkedList<R> operator+ (const LinkedList<R>& list1, const LinkedList<R>& list2)
         return list1;
 
     LinkedList list {list1};                    //case list1 and list2 not empty
-    NodeIterator<R> ptr {list2._head};         //init ptr to node
+    NodeIterator<R> ptr {list2._head};          //init ptr to node
     while (ptr.hasNext()) {
         list.push_back(ptr.next());
     }
@@ -169,24 +184,10 @@ LinkedList<R> operator+ (const LinkedList<R>& list1, const LinkedList<R>& list2)
 }
 
 
-//-- DESTRUCTOR
-template <typename T>
-LinkedList<T>::~LinkedList() {
-    Node <T>* to_delete = nullptr;
-
-    while (_head != nullptr) {
-        to_delete = _head;                      // update ptr
-        _head = _head->next;                    // update _head
-        delete to_delete;                       // delete node
-    }
-}
-
-
 //-- PRIVATE METHODS    -------------------------------------
-
 template <typename T>
 Node<T>* LinkedList<T>::searchNode(int index) const {
-    if (index >= _size || index < 0)                    // check if the operation is valid
+    if (index < 0 || (size_t) index >= _size)  // check if the operation is valid
         error("SearchNode");
 
     auto ptr = _head;
@@ -198,7 +199,6 @@ Node<T>* LinkedList<T>::searchNode(int index) const {
 
 
 //-- AUXILIARY CLASS    -------------------------------------
-
 template <typename T>                 
 NodeIterator<T>::NodeIterator(Node<T>* start) {
     _pointer = start;

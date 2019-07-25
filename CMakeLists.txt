@@ -1,4 +1,4 @@
-project(LinkedList)                         # project name
+project(List)                         # project name
 cmake_minimum_required(VERSION 3.5)         # minimum version
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)       # for clang-tidy
 
@@ -42,7 +42,8 @@ endif()
 # BUild
 include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/*.cpp)
-add_executable(exe ${SRCS})
+STRING(TOLOWER "${PROJECT_NAME}" exec_name)
+add_executable(${exec_name} ${SRCS})
 
 
 # CUSTOM TARGES
