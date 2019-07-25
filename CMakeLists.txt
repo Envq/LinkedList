@@ -39,20 +39,62 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "debug")
 endif()
 
 
-# BUild
+# Build
 include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 STRING(TOLOWER "${PROJECT_NAME}" exec_name)
 add_executable(${exec_name} ${SRCS})
 
 
-# CUSTOM TARGES
-add_custom_target(  rm
-                    COMMAND rm -rf *.o
-                    COMMENT "Clear buld directory"
+# Test
+
+
+# Install
+add_custom_target(  install-lib
+                    COMMAND mkdir -p ${PROJECT_SOURCE_DIR}/bin/
+                    COMMAND mv ${PROJECT_SOURCE_DIR}/build/${exec_name} ${PROJECT_SOURCE_DIR}/bin/
+                    COMMENT "Create executable"
 )
 
 
-# TEST
+# Clean
+add_custom_target(  clean-all
+                    COMMAND rm -rf ${PROJECT_SOURCE_DIR}/build/*
+                    COMMAND rm -rf ${PROJECT_SOURCE_DIR}/doc/*
+                    COMMENT "Cleane doc and build directory"
+)
+
+
+# Cloc stats
+find_program(CLOC_FOUND cloc)
+if (CLOC_FOUND)
+    add_custom_target(stats
+                    COMMAND cloc   ${PROJECT_SOURCE_DIR}/src
+                                   ${PROJECT_SOURCE_DIR}/include
+                                   ${PROJECT_SOURCE_DIR}/test
+                    COMMENT "Code statistics"
+    )
+endif()
+
+
+# Lyzard stats
+find_program(LYZARD_FOUND lizard)
+if (LYZARD_FOUND)
+    add_custom_target(cyclo
+                    COMMAND lizard ${PROJECT_SOURCE_DIR}/src/
+                                     ${PROJECT_SOURCE_DIR}/include/
+                    COMMENT "Code Complexity")
+endif()
+
+
+# Doxygen
+find_program(DOXYGEN_FOUND doxygen)
+if (DOXYGEN_FOUND)
+    add_custom_target(doc
+                    COMMAND mkdir -p ${PROJECT_SOURCE_DIR}/doc/
+                    COMMAND doxygen ${PROJECT_SOURCE_DIR}/doxygen.cfg
+                    COMMENT "Create code documentation")
+endif()
+
 
 

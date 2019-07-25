@@ -11,7 +11,7 @@ int main() {
     LinkedList <int> l {};
     LinkedList <int> l2 {};
 
-    std::cout << LinkedList<int>::count_istances() << std::endl;
+    std::cout << LinkedList<int>::count_instances() << std::endl;
 
     l.push_back(10);
     l.push_back(11);
