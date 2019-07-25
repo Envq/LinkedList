@@ -9,8 +9,9 @@ int main() {
     using namespace list;
 
     LinkedList <int> l {};
+    LinkedList <int> l2 {};
 
-    std::cout << l.foo() << std::endl;
+    std::cout << LinkedList<int>::count_istances() << std::endl;
 
     l.push_back(10);
     l.push_back(11);
@@ -27,7 +28,9 @@ int main() {
 
 /*
 NOTE-------
-#include "impl/list.i.hpp" non funziona
+mi piacerebbe accedere al parametro _instances di List da LinkedList ma non
+ riesco. C'è un modo migliore di quello che ho fatto io?
+
 
 
 

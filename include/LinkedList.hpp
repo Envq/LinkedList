@@ -34,9 +34,8 @@ public:
     ~LinkedList() override;
 
     //-- METHODS
-    template <typename T>
-    int foo() {
-        return List::x;
+    static int count_istances() {
+        return List<int>::count_istances();                 //???
     }
 
     size_t size() const override;

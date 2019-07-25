@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstddef>      // size_t
-#include <iostream>
 
 namespace list {
 
@@ -9,21 +8,24 @@ namespace list {
 //-- INTERFACE
 template <typename T>
 struct List {
-protected:
+private:
     //-- ATTRIBUTES
     static int _instances;
 
+
+protected:
     //-- CONSTRUCTORS
     explicit List();            //default constructor
 
     //-- DESTRUCTOR
     virtual ~List();
 
+    //-- GETTER _instances
+    static int count_istances();
+
 
 public:
     //-- METHODS
-    int x = -7;
-    static int count_istances();
     virtual size_t size() const = 0;
     virtual void push_back(int value) = 0;
     virtual void insert(int value, int index) = 0;
@@ -32,30 +34,5 @@ public:
 };
 
 
-//-- INITIALIZATIONS    -------------------------------------
-template <typename T>   
-int List<T>::_instances = 0;
-
-//-- CONSTRUCTORS       -------------------------------------
-template <typename T>
-List<T>::List() {
-    _instances++;
-    std::cout << "CONSTRUCTOR LIST" << std::endl;
-}
-
-//-- DESTRUCTOR
-template <typename T>
-List<T>::~List() {
-    _instances--;
-    std::cout << "DESTRUCTOR LIST" << std::endl;
-}
-
-//-- METHODS
-// template <typename T>
-// int List<T>::count_istances() {
-//     return -5;
-// }
-
-
 } // namespace list
-// #include "implementation/List.i.hpp"
+#include "implementation/List.i.hpp"

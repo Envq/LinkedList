@@ -9,7 +9,6 @@ namespace list {
 // user-provided constructor
 template <typename T>                         
 LinkedList<T>::LinkedList(int count) {
-    std::cout << "CONSTRUCTOR LINKEDLIST" << std::endl;
     _size = 0;
     _head = nullptr;
     _tail = nullptr;
@@ -37,7 +36,6 @@ LinkedList<T>::LinkedList(const LinkedList& obj) : LinkedList(0) {
 //-- DESTRUCTOR
 template <typename T>
 LinkedList<T>::~LinkedList() {
-    std::cout << "DESTRUCTOR LINKEDLIST" << std::endl;
     Node <T>* to_delete = nullptr;
 
     while (_head != nullptr) {
@@ -49,13 +47,6 @@ LinkedList<T>::~LinkedList() {
 
 
 //-- METHODS PUBLIC     -------------------------------------
-// template <typename T>
-// int LinkedList<T>::foo() {
-//     // return List<T>::count_instances();
-//     return -3;
-// }
-
-
 template <typename T>
 size_t LinkedList<T>::size() const {
     return _size;
