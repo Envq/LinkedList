@@ -66,8 +66,9 @@ add_custom_target(  install-lib
 # Clean
 add_custom_target(  clean-all
                     COMMAND rm -rf ${PROJECT_SOURCE_DIR}/build/*
-                    COMMAND rm -rf ${PROJECT_SOURCE_DIR}/doc/*
-                    COMMENT "Cleane doc and build directory"
+                    COMMAND rm -rf ${PROJECT_SOURCE_DIR}/doc
+                    COMMAND rm -rf ${PROJECT_SOURCE_DIR}/bin
+                    COMMENT "Clean build, bin and doc directory"
 )
 
 
