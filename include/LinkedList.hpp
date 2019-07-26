@@ -163,14 +163,20 @@ public:
     explicit NodeIterator(Node<T>* start);
 
     /**
-     * @brief Return 
+     * @brief Go to the next Node
      * 
-     * @return int 
+     * @return Return the value of pointend Node
      */
     int next();    
+
+    /**
+     * @brief Check if exist next Node
+     * 
+     * @return true if the next Node exist
+     * @return false if the next Node not exist
+     */
     bool hasNext();
 };
-
 
 } // namespace list
 #include "implementation/LinkedList.i.hpp"

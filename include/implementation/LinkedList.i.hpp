@@ -1,9 +1,22 @@
+/**
+ * @file LinkedList.i.hpp
+ * @author Enrico Sgarbanti
+ * @brief Implementation of methods for LinkedList
+ * @version 1.0
+ * @date 2019-07-25
+ * 
+ * @copyright Copyright (c) 2019 Enrico Sgarbanti. All rights reserved.
+ * @license GNU GPL v3
+ * 
+ */
+
+#pragma once
+
 #include "Util.hpp"     // error
 
 
-
+/// @brief Namespace for list
 namespace list {
-
 
 //-- CONSTRUCTORS       -------------------------------------
 // user-provided constructor
@@ -26,7 +39,7 @@ LinkedList<T>::LinkedList() : LinkedList(0) {}
 // copy constructor
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList& obj) : LinkedList(0) {
-    NodeIterator<T> ptr {obj._head};               //init ptr to node
+    NodeIterator<T> ptr {obj._head};                //init ptr to node
     while (ptr.hasNext()) {
         push_back(ptr.next());
     }
@@ -39,9 +52,9 @@ LinkedList<T>::~LinkedList() {
     Node <T>* to_delete = nullptr;
 
     while (_head != nullptr) {
-        to_delete = _head;                      // update ptr
-        _head = _head->next;                    // update _head
-        delete to_delete;                       // delete node
+        to_delete = _head;                          // update ptr
+        _head = _head->next;                        // update _head
+        delete to_delete;                           // delete node
     }
 }
 
@@ -86,7 +99,7 @@ void LinkedList<T>::insert(int value, int index) {
         _tail = node;                               //update _tail
 
     } else {
-        auto previous = searchNode(index - 1);      //find previous node
+        auto previous = getNode(index - 1);         //find previous node
         node->next = previous->next;
         previous->next = node;                      //connect previous node
     }
@@ -103,7 +116,7 @@ void LinkedList<T>::erase(int index) {
         delete to_delete;
     
     } else {
-        auto previous = searchNode(index - 1);      //find previous node
+        auto previous = getNode(index - 1);         //find previous node
         auto to_delete = previous->next;
         previous->next = to_delete->next;
         delete to_delete;
@@ -125,14 +138,14 @@ void LinkedList<T>::print() const {
 //-- UNARY OPERATOR OVERLOADING------------------------------
 template <typename T>
 const T& LinkedList<T>::operator[] (size_t index) const{
-    // check control is implicit in searchNode
-    return searchNode(index)->value;
+    // check control is implicit in getNode
+    return getNode(index)->value;
 }
 
 template <typename T>
 T& LinkedList<T>::operator[] (size_t index) {
-    // check control is implicit in searchNode
-    return searchNode(index)->value;
+    // check control is implicit in getNode
+    return getNode(index)->value;
 }
 
 
@@ -177,9 +190,9 @@ LinkedList<R> operator+ (const LinkedList<R>& list1, const LinkedList<R>& list2)
 
 //-- PRIVATE METHODS    -------------------------------------
 template <typename T>
-Node<T>* LinkedList<T>::searchNode(int index) const {
+Node<T>* LinkedList<T>::getNode(int index) const {
     if (index < 0 || (size_t) index >= _size)  // check if the operation is valid
-        error("SearchNode");
+        error("getNode");
 
     auto ptr = _head;
     for (int i = 0; i < index; i++) {
@@ -207,6 +220,5 @@ template <typename T>
 bool NodeIterator<T>::hasNext() {
     return _pointer != nullptr;
 }
-
 
 } // namespace list
