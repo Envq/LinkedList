@@ -1,4 +1,4 @@
-project(List)                         # project name
+project(List)                               # project name
 cmake_minimum_required(VERSION 3.5)         # minimum version
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)       # for clang-tidy
 
@@ -112,4 +112,24 @@ if (CLANG-FORMAT_FOUND)
                     COMMAND clang-format -i ${PROJECT_SOURCE_DIR}/include/implementation/*.i.hpp
                     COMMAND clang-format -i ${PROJECT_SOURCE_DIR}/src/*.cpp
                     COMMENT "Do clang format")
+endif()
+
+
+# Clang-tidy
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    find_program(SCANBUILD_FOUND scan-build)
+    if (SCANBUILD_FOUND)
+        add_custom_target(scan
+                          COMMAND make clean
+                          COMMAND scan-build make
+                          COMMENT "Do scan-build Static Analysis")
+    endif()
+
+    find_program(CLANGTIDY_FOUND clang-tidy)
+    if (CLANGTIDY_FOUND)
+        add_custom_target(tidy
+                          COMMAND clang-tidy -p=.
+                                  ../src/*.cpp ../test/*.cpp
+                          COMMENT "Do clang-tidy Linter")
+    endif()
 endif()
