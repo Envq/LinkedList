@@ -6,6 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED)
 set(CMAKE_CXX_EXTENSIONS)
 
+set(MY_PROJECT_FILES
+    include/*.hpp
+    include/implementation/*.i.hpp
+    src/*.cpp
+)
+
 
 # Options for compiler used
 if (CMAKE_COMPILER_IS_GNUCXX)
@@ -97,4 +103,12 @@ if (DOXYGEN_FOUND)
 endif()
 
 
-
+# Clang-format
+find_program(CLANG-FORMAT_FOUND clang-format)
+if (CLANG-FORMAT_FOUND)
+    add_custom_target(format
+                    COMMAND clang-format -i ${PROJECT_SOURCE_DIR}/include/*.hpp
+                    COMMAND clang-format -i ${PROJECT_SOURCE_DIR}/include/implementation/*.i.hpp
+                    COMMAND clang-format -i ${PROJECT_SOURCE_DIR}/src/*.cpp
+                    COMMENT "Do clang format")
+endif()

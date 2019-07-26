@@ -3,13 +3,11 @@
 
 #include <iostream>
 
-
-
 int main() {
     using namespace list;
 
-    LinkedList <int> l {};
-    LinkedList <int> l2 {};
+    LinkedList<int> l{};
+    LinkedList<int> l2{};
 
     std::cout << LinkedList<int>::count_instances() << std::endl;
 
@@ -19,12 +17,8 @@ int main() {
 
     // std::cout << l << std::endl;
 
-
-
-
     return 0;
 }
-
 
 /*
 NOTE-------
