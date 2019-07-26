@@ -121,7 +121,7 @@ void LinkedList<T>::erase(int index) {
         if ((size_t) index == _size - 1) // check if is the last
             _tail = previous;
     }
-    _size--;                   // update _size
+    _size--; // update _size
 }
 
 template<typename T>
@@ -196,8 +196,7 @@ LinkedList<R> operator+(const LinkedList<R> &list1,
 }
 
 template<typename R>
-bool operator==(const LinkedList<R> &list1,
-                const LinkedList<R> &list2) {
+bool operator==(const LinkedList<R> &list1, const LinkedList<R> &list2) {
     if (list1._size != list2._size) // case list1 and list2 have different size
         return false;
 
@@ -205,11 +204,11 @@ bool operator==(const LinkedList<R> &list1,
     NodeIterator<R> ptr2{list2._head}; // init ptr to list2
     while (ptr1.hasNext()) {
         if (ptr1.next() != ptr2.next()) {
-            return false;                      // exit if Node.value is different
+            return false; // exit if Node.value is different
         }
     }
 
-    return true;                        // case in which all the nodes are equal
+    return true; // case in which all the nodes are equal
 }
 
 //-- PRIVATE METHODS    -------------------------------------

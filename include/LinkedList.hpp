@@ -137,8 +137,8 @@ class LinkedList : public List<T> {
                                    const LinkedList<R> &list2);
     /**
      * @brief Compare two lists
-     * 
-     * @tparam R 
+     *
+     * @tparam R
      * @param list1: First LinkedList
      * @param list2: Secondo LinkedList
      * @return true if the lists are equals

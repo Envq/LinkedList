@@ -88,7 +88,7 @@ struct List {
 
     /**
      * @brief Check if the list contains "value"
-     * 
+     *
      * @param value: Value to check
      * @return true if value is contained
      * @return false if value is not contained
