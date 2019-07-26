@@ -85,6 +85,15 @@ struct List {
      *
      */
     virtual void print() const = 0;
+
+    /**
+     * @brief Check if the list contains "value"
+     * 
+     * @param value: Value to check
+     * @return true if value is contained
+     * @return false if value is not contained
+     */
+    virtual bool contains(T value) const = 0;
 };
 
 } // namespace list

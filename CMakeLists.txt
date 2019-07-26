@@ -9,8 +9,7 @@ set(CMAKE_CXX_EXTENSIONS)
 set(MY_PROJECT_FILES
     include/*.hpp
     include/implementation/*.i.hpp
-    src/*.cpp
-)
+    src/*.cpp)
 
 
 # Options for compiler used
@@ -46,21 +45,22 @@ endif()
 
 
 # Build
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/include
+                    ${PROJECT_SOURCE_DIR}/lib)
 file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 STRING(TOLOWER "${PROJECT_NAME}" exec_name)
-add_executable(${exec_name} ${SRCS})
-
-
-# Test
+add_library(${exec_name} ${SRCS})
+#add_executable(${exec_name} ${SRCS})
+add_executable(${exec_name}_test EXCLUDE_FROM_ALL
+                ${PROJECT_SOURCE_DIR}/test/Test.cpp)
+target_link_libraries(${exec_name}_test ${exec_name})
 
 
 # Install
 add_custom_target(  install-lib
                     COMMAND mkdir -p ${PROJECT_SOURCE_DIR}/bin/
                     COMMAND mv ${PROJECT_SOURCE_DIR}/build/${exec_name} ${PROJECT_SOURCE_DIR}/bin/
-                    COMMENT "Create executable"
-)
+                    COMMENT "Create executable")
 
 
 # Clean
@@ -68,8 +68,7 @@ add_custom_target(  clean-all
                     COMMAND rm -rf ${PROJECT_SOURCE_DIR}/build/*
                     COMMAND rm -rf ${PROJECT_SOURCE_DIR}/doc
                     COMMAND rm -rf ${PROJECT_SOURCE_DIR}/bin
-                    COMMENT "Clean build, bin and doc directory"
-)
+                    COMMENT "Clean build, bin and doc directory")
 
 
 # Cloc stats
@@ -79,8 +78,7 @@ if (CLOC_FOUND)
                     COMMAND cloc   ${PROJECT_SOURCE_DIR}/src
                                    ${PROJECT_SOURCE_DIR}/include
                                    ${PROJECT_SOURCE_DIR}/test
-                    COMMENT "Code statistics"
-    )
+                    COMMENT "Code statistics")
 endif()
 
 
@@ -133,3 +131,47 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
                           COMMENT "Do clang-tidy Linter")
     endif()
 endif()
+
+
+# Test
+enable_testing()
+
+ADD_TEST(NAME CompileTest
+         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+         COMMAND make list_test)
+
+ADD_TEST(NAME EqualsTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [equals])
+
+ADD_TEST(NAME get_operatorTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [get_operator])
+
+ADD_TEST(NAME insertTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [insert])
+
+ADD_TEST(NAME eraseTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [erase])
+
+ADD_TEST(NAME sizeTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [size])
+
+ADD_TEST(NAME UserProvidedConstructorTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [up_constructor])
+
+ADD_TEST(NAME copyConstructorTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [copy_constructor])
+
+ADD_TEST(NAME CountInstanceTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [count_istances])
+
+ADD_TEST(NAME ContainsTest
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+        COMMAND ./list_test [contains])

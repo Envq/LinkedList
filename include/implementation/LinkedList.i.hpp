@@ -121,6 +121,7 @@ void LinkedList<T>::erase(int index) {
         if ((size_t) index == _size - 1) // check if is the last
             _tail = previous;
     }
+    _size--;                   // update _size
 }
 
 template<typename T>
@@ -129,6 +130,17 @@ void LinkedList<T>::print() const {
     while (ptr.hasNext()) {
         std::cout << ptr.next() << std::endl;
     }
+}
+
+template<typename T>
+bool LinkedList<T>::contains(T value) const {
+    NodeIterator<T> ptr{_head}; // init ptr to node
+    while (ptr.hasNext()) {
+        if (ptr.next() == value) {
+            return true;
+        }
+    }
+    return false;
 }
 
 //-- UNARY OPERATOR OVERLOADING------------------------------
@@ -181,6 +193,23 @@ LinkedList<R> operator+(const LinkedList<R> &list1,
     }
 
     return list;
+}
+
+template<typename R>
+bool operator==(const LinkedList<R> &list1,
+                const LinkedList<R> &list2) {
+    if (list1._size != list2._size) // case list1 and list2 have different size
+        return false;
+
+    NodeIterator<R> ptr1{list1._head}; // init ptr to list1
+    NodeIterator<R> ptr2{list2._head}; // init ptr to list2
+    while (ptr1.hasNext()) {
+        if (ptr1.next() != ptr2.next()) {
+            return false;                      // exit if Node.value is different
+        }
+    }
+
+    return true;                        // case in which all the nodes are equal
 }
 
 //-- PRIVATE METHODS    -------------------------------------

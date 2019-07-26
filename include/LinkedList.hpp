@@ -93,6 +93,7 @@ class LinkedList : public List<T> {
     void insert(int value, int index) override;
     void erase(int index) override;
     void print() const override;
+    bool contains(T value) const override;
 
     //-- UNARY OPERATOR OVERLOADING
     /**
@@ -134,6 +135,18 @@ class LinkedList : public List<T> {
     template<typename R>
     friend LinkedList<R> operator+(const LinkedList<R> &list1,
                                    const LinkedList<R> &list2);
+    /**
+     * @brief Compare two lists
+     * 
+     * @tparam R 
+     * @param list1: First LinkedList
+     * @param list2: Secondo LinkedList
+     * @return true if the lists are equals
+     * @return false if the lists are different
+     */
+    template<typename R>
+    friend bool operator==(const LinkedList<R> &list1,
+                           const LinkedList<R> &list2);
 };
 
 // AUXILIARY CLASS

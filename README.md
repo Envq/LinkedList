@@ -8,7 +8,10 @@ How to compile:
 How to run:
 
 
+mi piacerebbe accedere al parametro _instances di List da LinkedList ma non
+ riesco. C'è un modo migliore di quello che ho fatto io?
 
+non riesco a far compilare con clang
 
 
 
