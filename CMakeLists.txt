@@ -144,19 +144,19 @@ ADD_TEST(NAME EqualsTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [equals])
 
-ADD_TEST(NAME get_operatorTest
+ADD_TEST(NAME GetOperatorTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [get_operator])
 
-ADD_TEST(NAME insertTest
+ADD_TEST(NAME InsertTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [insert])
 
-ADD_TEST(NAME eraseTest
+ADD_TEST(NAME EraseTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [erase])
 
-ADD_TEST(NAME sizeTest
+ADD_TEST(NAME SizeTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [size])
 
@@ -164,7 +164,7 @@ ADD_TEST(NAME UserProvidedConstructorTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [up_constructor])
 
-ADD_TEST(NAME copyConstructorTest
+ADD_TEST(NAME CopyConstructorTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [copy_constructor])
 
@@ -179,27 +179,53 @@ ADD_TEST(NAME ContainsTest
 # Valgrind tests
 find_program(VALGRIND_FOUND valgrind)
 if (VALGRIND_FOUND)
-    ADD_TEST(NAME ValgrindTest1
+    ADD_TEST(NAME EqualsValgrindTest
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
                 COMMAND valgrind --leak-check=full --show-leak-kinds=all
                                 --track-origins=yes
-                                ./algebra_test [IntVector])
+                                ./list_test [equals])
+    ADD_TEST(NAME GetOperatorValgrindTest
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./list_test [get_operator])
+    ADD_TEST(NAME InsertValgrindTest
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./list_test [insert])
 
-    ADD_TEST(NAME ValgrindTest2
+    ADD_TEST(NAME EraseValgrindTest
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
                 COMMAND valgrind --leak-check=full --show-leak-kinds=all
                                 --track-origins=yes
-                                ./algebra_test [FloatVector])
+                                ./list_test [erase])
 
-    ADD_TEST(NAME ValgrindTest3
+    ADD_TEST(NAME SizeValgrindTest
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
                 COMMAND valgrind --leak-check=full --show-leak-kinds=all
                                 --track-origins=yes
-                                ./algebra_test [IntMatrix])
+                                ./list_test [size])
+    ADD_TEST(NAME UserProvidedConstructorValgrindTest
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./list_test [up_constructor])
+    ADD_TEST(NAME CopyConstructorValgrindTest
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./list_test [copy_constructor])
 
-    ADD_TEST(NAME ValgrindTest4
+    ADD_TEST(NAME CountIstancesValgrindTest
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
                 COMMAND valgrind --leak-check=full --show-leak-kinds=all
                                 --track-origins=yes
-                                ./algebra_test [FloatMatrix])
+                                ./list_test [count_istances])
+
+    ADD_TEST(NAME ContainsValgrindTest
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./list_test [contains])                
 endif()
