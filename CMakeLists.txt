@@ -175,3 +175,31 @@ ADD_TEST(NAME CountInstanceTest
 ADD_TEST(NAME ContainsTest
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
         COMMAND ./list_test [contains])
+
+# Valgrind tests
+find_program(VALGRIND_FOUND valgrind)
+if (VALGRIND_FOUND)
+    ADD_TEST(NAME ValgrindTest1
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./algebra_test [IntVector])
+
+    ADD_TEST(NAME ValgrindTest2
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./algebra_test [FloatVector])
+
+    ADD_TEST(NAME ValgrindTest3
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./algebra_test [IntMatrix])
+
+    ADD_TEST(NAME ValgrindTest4
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/build
+                COMMAND valgrind --leak-check=full --show-leak-kinds=all
+                                --track-origins=yes
+                                ./algebra_test [FloatMatrix])
+endif()
