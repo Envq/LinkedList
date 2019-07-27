@@ -43,9 +43,11 @@ $ pip install lizard
 
 ### Building from source
 
-Download the folder
+Run this:
 
 ~~~
+$ git clone https://github.com/Envq/List.git
+$ cd List
 $ mkdir -p build
 $ cd build
 $ cmake ..
