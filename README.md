@@ -15,7 +15,7 @@ This is my implementation of List with LinkedList for the C ++ course
 
 ## Getting Started
 
-This code was be tested on Ubuntu 18.04 with GCC
+This code was tested on Ubuntu 18.04 with GCC
 
 ### Dependencies
 
@@ -27,13 +27,13 @@ $ sudo apt install clang cmake git
 
 **Optional dependencies:**
 
-- `doxygen` *required for generate documentations* 
+- `doxygen` *required for generating documentation* 
 - `clang-format 6.0` *required for formatting code* 
-- `clang-tidy` *required for use a linter* 
-- `scan-build` *required for static analyze* 
-- `cloc` *required for count lines of code* 
-- `valgrind` *required for detect many memory managemnte and threading bugs* 
-- `lizard` *required for cyclomatic complexity analyze* 
+- `clang-tidy` *required for using a linter* 
+- `scan-build` *required for static analysis* 
+- `cloc` *required for counting lines of code* 
+- `valgrind` *required for detecting many memory management and threading bugs* 
+- `lizard` *required for cyclomatic complexity analysis* 
 
 ~~~
 $ sudo apt install doxygen clang-format clang-tidy clang-tools cloc valgrind
@@ -60,7 +60,7 @@ There's also a helper script available in the root folder:
 
 ### Installing
 
-After building project do:
+After building project run:
 
 ~~~
 $ make install-lib
@@ -69,7 +69,7 @@ $ make install-lib
 
 ### Running tests
 
-After building project do:
+After building project run:
 
 ~~~
 $ make test
