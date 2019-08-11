@@ -69,7 +69,7 @@ class LinkedList : public List<T> {
      *
      * @param obj: Object (LinkedList) to initialize this LinkedList
      */
-    explicit LinkedList(const LinkedList<T> &obj);
+    LinkedList(const LinkedList<T> &obj);
 
     /**
      * @brief Destroy the LinkedList object

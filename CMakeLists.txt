@@ -14,9 +14,9 @@ set(MY_PROJECT_FILES
 
 # Options for compiler used
 if (CMAKE_COMPILER_IS_GNUCXX)
-    message(GCC)
-elseif (CMAKE_COMPILER_ID EQUAL "Clang")
-    message(Clang)
+    message(==>GCC)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(==>Clang)
 endif()
 
 
@@ -113,23 +113,23 @@ if (CLANG-FORMAT_FOUND)
 endif()
 
 
-# Clang-tidy
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    find_program(SCANBUILD_FOUND scan-build)
-    if (SCANBUILD_FOUND)
-        add_custom_target(scan
-                          COMMAND make clean
-                          COMMAND scan-build make
-                          COMMENT "Do scan-build Static Analysis")
-    endif()
+# Clang-scan-build
+find_program(SCANBUILD_FOUND scan-build)
+if (SCANBUILD_FOUND)
+    add_custom_target(scan
+                        COMMAND make clean
+                        COMMAND scan-build make
+                        COMMENT "Do scan-build Static Analysis")
+endif()
 
-    find_program(CLANGTIDY_FOUND clang-tidy)
-    if (CLANGTIDY_FOUND)
-        add_custom_target(tidy
-                          COMMAND clang-tidy -p=.
-                                  ../src/*.cpp ../test/*.cpp
-                          COMMENT "Do clang-tidy Linter")
-    endif()
+
+# Clang-tidy
+find_program(CLANGTIDY_FOUND clang-tidy)
+if (CLANGTIDY_FOUND)
+    add_custom_target(tidy
+                        COMMAND clang-tidy -p=.
+                                ../src/*.cpp ../test/*.cpp
+                        COMMENT "Do clang-tidy Linter")
 endif()
 
 

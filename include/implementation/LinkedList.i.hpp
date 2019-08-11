@@ -33,7 +33,8 @@ LinkedList<T>::LinkedList(int count) {
 
 // default constructor
 template<typename T>
-LinkedList<T>::LinkedList() : LinkedList(0) {}
+LinkedList<T>::LinkedList() : LinkedList(0) {
+}
 
 // copy constructor
 template<typename T>
@@ -68,10 +69,11 @@ void LinkedList<T>::push_back(int value) {
     node->value = value;
     node->next = nullptr;
 
-    if (_size == 0) // init _head
+    if (_size == 0) { // init _head
         _head = node;
-    else
+    } else {
         _tail->next = node; // connect to the previous node
+    }
 
     _tail = node; // connect _tail to the new last node
     _size++;      // update size
@@ -79,7 +81,7 @@ void LinkedList<T>::push_back(int value) {
 
 template<typename T>
 void LinkedList<T>::insert(int value, int index) {
-    if (index < 0 || (size_t) index > _size) // check if the operation is valid
+    if (index < 0 || static_cast<size_t>(index) > _size) // check if the operation is valid
         error("Insert");
 
     auto node = new Node<T>(); // create new node
@@ -90,7 +92,7 @@ void LinkedList<T>::insert(int value, int index) {
         node->next = _head;
         _head = node; // update _head
 
-    } else if ((size_t) index == _size) { // check if is the last
+    } else if (static_cast<size_t>(index) == _size) { // check if is the last
         node->next = nullptr;
         _tail->next = node;
         _tail = node; // update _tail
@@ -104,7 +106,7 @@ void LinkedList<T>::insert(int value, int index) {
 
 template<typename T>
 void LinkedList<T>::erase(int index) {
-    if (index < 0 || (size_t) index >= _size) // check if the operation is valid
+    if (index < 0 || static_cast<size_t>(index) >= _size) // check if the operation is valid
         error("Erase");
 
     if (index == 0) { // check if is the first
@@ -118,7 +120,7 @@ void LinkedList<T>::erase(int index) {
         previous->next = to_delete->next;
         delete to_delete;
 
-        if ((size_t) index == _size - 1) // check if is the last
+        if (static_cast<size_t>(index) == _size - 1) // check if is the last
             _tail = previous;
     }
     _size--; // update _size
@@ -214,7 +216,7 @@ bool operator==(const LinkedList<R> &list1, const LinkedList<R> &list2) {
 //-- PRIVATE METHODS    -------------------------------------
 template<typename T>
 Node<T> *LinkedList<T>::getNode(int index) const {
-    if (index < 0 || (size_t) index >= _size) // check if the operation is valid
+    if (index < 0 || static_cast<size_t>(index) >= _size) // check if the operation is valid
         error("getNode");
 
     auto ptr = _head;
