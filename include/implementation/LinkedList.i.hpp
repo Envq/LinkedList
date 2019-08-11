@@ -33,8 +33,7 @@ LinkedList<T>::LinkedList(int count) {
 
 // default constructor
 template<typename T>
-LinkedList<T>::LinkedList() : LinkedList(0) {
-}
+LinkedList<T>::LinkedList() : LinkedList(0) {}
 
 // copy constructor
 template<typename T>
@@ -81,7 +80,8 @@ void LinkedList<T>::push_back(int value) {
 
 template<typename T>
 void LinkedList<T>::insert(int value, int index) {
-    if (index < 0 || static_cast<size_t>(index) > _size) // check if the operation is valid
+    if (index < 0 ||
+        static_cast<size_t>(index) > _size) // check if the operation is valid
         error("Insert");
 
     auto node = new Node<T>(); // create new node
@@ -106,7 +106,8 @@ void LinkedList<T>::insert(int value, int index) {
 
 template<typename T>
 void LinkedList<T>::erase(int index) {
-    if (index < 0 || static_cast<size_t>(index) >= _size) // check if the operation is valid
+    if (index < 0 ||
+        static_cast<size_t>(index) >= _size) // check if the operation is valid
         error("Erase");
 
     if (index == 0) { // check if is the first
@@ -216,7 +217,8 @@ bool operator==(const LinkedList<R> &list1, const LinkedList<R> &list2) {
 //-- PRIVATE METHODS    -------------------------------------
 template<typename T>
 Node<T> *LinkedList<T>::getNode(int index) const {
-    if (index < 0 || static_cast<size_t>(index) >= _size) // check if the operation is valid
+    if (index < 0 ||
+        static_cast<size_t>(index) >= _size) // check if the operation is valid
         error("getNode");
 
     auto ptr = _head;
