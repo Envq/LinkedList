@@ -59,7 +59,7 @@ target_link_libraries(${exec_name}_test ${exec_name})
 # Install
 add_custom_target(  install-lib
                     COMMAND mkdir -p ${PROJECT_SOURCE_DIR}/bin/
-                    COMMAND mv ${PROJECT_SOURCE_DIR}/build/${exec_name} ${PROJECT_SOURCE_DIR}/bin/
+                    COMMAND mv ${PROJECT_SOURCE_DIR}/build/liblist.a ${PROJECT_SOURCE_DIR}/bin/
                     COMMENT "Create executable")
 
 

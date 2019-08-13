@@ -11,3 +11,5 @@
  */
 
 #include "LinkedList.hpp"
+
+// Here specializations could be made

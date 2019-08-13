@@ -26,8 +26,20 @@ LinkedList<T>::LinkedList(int count) {
     _tail = nullptr;
 
     // init list
-    for (int i = 0; i < count; i++) {
-        push_back(0);
+    for (int i = 0; i < count; i++) {  
+        // == push_back(0);
+        auto node = new Node<T>(); // create new node
+        node->value = 0;
+        node->next = nullptr;
+
+        if (_size == 0) { // init _head
+            _head = node;
+        } else {
+            _tail->next = node; // connect to the previous node
+        }
+
+        _tail = node; // connect _tail to the new last node
+        _size++;      // update size
     }
 }
 
